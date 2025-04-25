@@ -7,7 +7,6 @@
 
 void enregistrement_score(const char* nom, int cpt){
     FILE*fichier=fopen("scores.txt","a");
-        
     if (fichier==NULL){
         printf("le fichier ne s'est pas ouvert\n");
         return;
@@ -22,7 +21,8 @@ void enregistrement_score(const char* nom, int cpt){
     fprintf(fichier, "date et heure :%s\n",date_heure);
     fprintf(fichier, "score : %d\n",cpt);
     fclose(fichier);
-    printf("votre score a été enregistré\n");}//étape 14
+    printf("votre score a été enregistré\n");
+}//étape 14
 
 
 void retrouver_scores(const char* nom) {
@@ -97,12 +97,41 @@ int main()
       }//étape3 modifiéé par l'étape 6
       if (choix==1)
       {
+          int nb_coup=1;// à rajouter pour l'étape 17
+          int points=0;// à rajouter pour l'étape 17
           srand (time(NULL));
           int a=rand()%101;
           int b=rand()%101;
           
           int reponse;
-          printf("combien font %d+%d ?\n",a,b);
+          
+          while (nb_coup<=3){
+            printf("essai %d combien font %d+%d ?\n",nb_coup,a,b);
+            scanf("%d",&reponse);
+            if(reponse==a+b){
+                if(nb_coup==1){
+                    points=10;}
+                else if (nb_coup==2){
+                    points=5;}
+                else if(nb_coup==3){
+                    points=1;}
+                printf("bravo, vous avez trouvé en %d essais, vous gagnez %d point(s)\n", nb_coup, points);
+                break;//permet de sortir du while sans aller jusqu'a 3
+            }
+            else{
+                printf("mauvaise réponse\n");
+                if(nb_coup<3){
+                    printf("essayez encore\n");}
+                }
+            nb_coup=nb_coup+1;}
+          if(reponse!=a+b){
+            printf("c'est faux, la reponse est %d\n",a+b);
+          }//nouveau calcul de points, étape 17
+          cpt=cpt+points;  //ajout des points obtenus au score total
+          enregistrement_score(nom, cpt);
+        }
+          
+          /*printf("combien font %d+%d ?\n",a,b);
           printf("entrez le résultat\n");
           scanf("%d",&reponse);
           printf("vous avez entré %d\n",reponse);
@@ -114,7 +143,7 @@ int main()
           }
           cpt=cpt+1;//étape11
           enregistrement_score(nom,cpt);//étape 17
-        }//étape 4
+        }//étape 4 qui n'est plus nécessaire à l'étape 17*/ }
         
         if (choix==0){
             printf("merci de votre visite !\n\n");
@@ -162,8 +191,8 @@ int main()
                 printf("c'est faux, la reponse est %d\n",a-b);
             }//étape10
             
-            cpt=cpt+1; }//étape11
-            enregistrement_score(nom,cpt);//étape 17
+            cpt=cpt+1;//étape11
+            enregistrement_score(nom,cpt);}//étape 17
             
             if (choix==4){
                 int table;
@@ -186,11 +215,11 @@ int main()
             cpt=cpt+1;//étape11
             enregistrement_score(nom,cpt);//étape 17
             }//étape13
-            }
     printf("votre nombre de points est %d\n\n",cpt);
    
     /*printf("quel est votre nom ?");
     scanf("%s",&nom);*/// utile à l'étape14 mais plus nécessaire à la 15
     enregistrement_score(nom,cpt);//lancement de la fonction pour remplir le fichier pour étape 14
     return 0;
-}
+    } 
+

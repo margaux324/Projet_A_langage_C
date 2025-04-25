@@ -6,30 +6,59 @@
 #define FILE_NAME "scores.txt"// à rajouter pour l'étape 14, fichier pour sauvegarde des scores
 
 void enregistrement_score(const char* nom, int cpt){
-        FILE*fichier=fopen("scores.txt","a");
+    FILE*fichier=fopen("scores.txt","a");
         
-        if (fichier==NULL){
-            printf("le fichier ne s'est pas ouvert\n");
-            return;
+    if (fichier==NULL){
+        printf("le fichier ne s'est pas ouvert\n");
+        return;
+    }
+    time_t temps = time(NULL);//donne le temps actuel
+    struct tm *tm_info=localtime(&temps);//converti le temps en structure tm
+    char date_heure[30];//tableau qui stocke la date et l'heure
+    strftime((date_heure), sizeof(date_heure),"%d/%m/%Y %H:%M:%S", tm_info);
+        
+    //remplir le fichier avec les infos
+    fprintf(fichier, "nom :%s\n",nom);
+    fprintf(fichier, "date et heure :%s\n",date_heure);
+    fprintf(fichier, "score : %d\n",cpt);
+    fclose(fichier);
+    printf("votre score a été enregistré\n");}//étape 14
+
+
+void retrouver_scores(const char* nom) {
+    FILE* fichier = fopen(FILE_NAME, "r");
+    if (fichier == NULL) {
+        printf("vous n'avez pas d'ancien score\n");
+        return;
+    }
+
+    char données[100];//création d'un tableau pour stockées les données parcourues du fichier
+    int ancien_score = 0;
+
+    while (fgets(données, sizeof(données), fichier)) {
+        if (strstr(données, nom) != NULL) {
+            ancien_score = 1;
+            printf("\nAncien score trouvé pour %s :\n", nom);
+            printf("%s", données); // nom
+            if (fgets(données, sizeof(données), fichier)) printf("%s", données); // lit et affiche les données de date et heure
+            if (fgets(données, sizeof(données), fichier)) printf("%s\n", données); // lit et affiche les données du score
         }
-        time_t temps = time(NULL);//donne le temps actuel
-        struct tm *tm_info=localtime(&temps);//converti le temps en structure tm
-        char date_heure[30];//tableau qui stocke la date et l'heure
-        strftime((date_heure), sizeof(date_heure),"%d/%m/%Y %H:%M:%S", tm_info);
-        
-        //remplir le fichier avec les infos
-        fprintf(fichier, "nom :%s\n",nom);
-        fprintf(fichier, "date et heure :%s\n",date_heure);
-        fprintf(fichier, "score : %d\n",cpt);
-        fclose(fichier);
-        printf("votre score a été enregistré\n");}//étape 14
+    }
+    if (ancien_score==0) {
+        printf("aucun score n'est trouvé pour %s\n", nom);
+    }
+    fclose(fichier);
+}//paragraphe à rajouter pour étape 15
+
 
 int main()
 {
   int choix=1;
   int cpt=0;// à rajouter pour l'étape 11
   char nom[20];// à rajouter pour l'étape 14
-  
+  printf("entrez votre nom : ");
+  scanf("%s", nom);
+  retrouver_scores(nom);
   
   while (choix!=0){// à rajouter pour l'étape 5
       printf("+-------------------------------+\n");
@@ -87,7 +116,7 @@ int main()
         }//étape 4
         
         if (choix==0){
-            printf("merci de votre visite !");
+            printf("merci de votre visite !\n\n");
         }//étape 5
         
         if (choix==3){
@@ -154,13 +183,10 @@ int main()
             cpt=cpt+1;//étape11
             }//étape13
             }
-    printf("votre nombre de points est %d\n",cpt);
+    printf("votre nombre de points est %d\n\n",cpt);
    
-    printf("quel est votre nom ?");
-    scanf("%s",&nom);
-    //fgets(nom, sizeof(nom),stdin);
-    //nom[strcspn(nom,"\n")]='\0';
-  
-    enregistrement_score(nom,cpt);
+    /*printf("quel est votre nom ?");
+    scanf("%s",&nom);*/// utile à l'étape14 mais plus nécessaire à la 15
+    enregistrement_score(nom,cpt);//lancement de la fonction pour remplir le fichier
     return 0;
 }

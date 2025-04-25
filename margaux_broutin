@@ -113,6 +113,7 @@ int main()
               printf("c'est faux, la reponse est %d\n",a+b);
           }
           cpt=cpt+1;//étape11
+          enregistrement_score(nom,cpt);//étape 17
         }//étape 4
         
         if (choix==0){
@@ -135,6 +136,7 @@ int main()
                 printf("c'est faux, la reponse est %d\n",a*b);
             }
             cpt=cpt+1;//étape11
+            enregistrement_score(nom,cpt);//étape 17
         }//étape 9
         
         if (choix==2){
@@ -161,6 +163,7 @@ int main()
             }//étape10
             
             cpt=cpt+1; }//étape11
+            enregistrement_score(nom,cpt);//étape 17
             
             if (choix==4){
                 int table;
@@ -181,12 +184,13 @@ int main()
                     }
                 }
             cpt=cpt+1;//étape11
+            enregistrement_score(nom,cpt);//étape 17
             }//étape13
             }
     printf("votre nombre de points est %d\n\n",cpt);
    
     /*printf("quel est votre nom ?");
     scanf("%s",&nom);*/// utile à l'étape14 mais plus nécessaire à la 15
-    enregistrement_score(nom,cpt);//lancement de la fonction pour remplir le fichier
+    enregistrement_score(nom,cpt);//lancement de la fonction pour remplir le fichier pour étape 14
     return 0;
 }

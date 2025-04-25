@@ -1,0 +1,166 @@
+#include <stdio.h> 
+#include<stdlib.h> // à rajouter pour l'étape 4, obligatoire quand on utilise rand et srand
+#include<time.h>// à rajouter pour l'étape 14, utile pour gérer l'heure
+#include<string.h>// à rajouter pour l'étape 14, obligatoire pour les chaines de caracteres
+
+#define FILE_NAME "scores.txt"// à rajouter pour l'étape 14, fichier pour sauvegarde des scores
+
+void enregistrement_score(const char* nom, int cpt){
+        FILE*fichier=fopen("scores.txt","a");
+        
+        if (fichier==NULL){
+            printf("le fichier ne s'est pas ouvert\n");
+            return;
+        }
+        time_t temps = time(NULL);//donne le temps actuel
+        struct tm *tm_info=localtime(&temps);//converti le temps en structure tm
+        char date_heure[30];//tableau qui stocke la date et l'heure
+        strftime((date_heure), sizeof(date_heure),"%d/%m/%Y %H:%M:%S", tm_info);
+        
+        //remplir le fichier avec les infos
+        fprintf(fichier, "nom :%s\n",nom);
+        fprintf(fichier, "date et heure :%s\n",date_heure);
+        fprintf(fichier, "score : %d\n",cpt);
+        fclose(fichier);
+        printf("votre score a été enregistré\n");}//étape 14
+
+int main()
+{
+  int choix=1;
+  int cpt=0;// à rajouter pour l'étape 11
+  char nom[20];// à rajouter pour l'étape 14
+  
+  
+  while (choix!=0){// à rajouter pour l'étape 5
+      printf("+-------------------------------+\n");
+      printf("|1 : Addition                   |\n");
+      printf("|2 : Soustraction               |\n");
+      printf("|3 : Multiplication             |\n");
+      printf("|4 : Tables de multiplication   |\n");
+      printf("|5 : Divisions                  |\n");
+      printf("|0 : Sortir du jeu              |\n");
+      printf("+-------------------------------+\n");
+      printf("Quel est votre choix ?"); // étape 1
+      scanf("%d",&choix);
+      printf("\n");//étape 2
+      switch (choix) 
+      {
+          /*if(choix==1){
+              printf("Addition\n");}
+            else if(choix==2){
+                printf("Soustraction\n");}
+            else if(choix==3){
+                printf("Multiplication\n");}
+            else if(choix==4){
+               printf("Tables de multiplications\n");
+            else if(choix==5){
+                printf("Divisions\n");}
+            else if(choix==0){
+                printf("Sortir du jeu\n");}*///étape 3
+          case 1 : printf("Addition\n"); break;
+          case 2 : printf("Soustraction\n"); break;
+          case 3 : printf("Multiplication\n"); break;
+          case 4 : printf("Tables de multiplications\n"); break;
+          case 5 : printf("Divisions\n"); break;
+          case 0 : printf("Sortir du jeu\n"); break;
+          default : printf("Erreur : le choix doit être compris entre 0 et 5\n");
+          
+      }//étape3 modifiéé par l'étape 6
+      if (choix==1)
+      {
+          srand (time(NULL));
+          int a=rand()%101;
+          int b=rand()%101;
+          
+          int reponse;
+          printf("combien font %d+%d ?\n",a,b);
+          printf("entrez le résultat\n");
+          scanf("%d",&reponse);
+          printf("vous avez entré %d\n",reponse);
+          if (reponse==a+b){
+              printf("bravo\n");
+          } 
+          else {
+              printf("c'est faux, la reponse est %d\n",a+b);
+          }
+          cpt=cpt+1;//étape11
+        }//étape 4
+        
+        if (choix==0){
+            printf("merci de votre visite !");
+        }//étape 5
+        
+        if (choix==3){
+            srand (time(NULL));
+            int a=rand()%11;
+            int b=rand()%11;
+            int reponse;
+            printf("combien font %d*%d ?\n",a,b);
+            printf("entrez le résultat\n");
+            scanf("%d",&reponse);
+            printf("vous avez entré %d\n",reponse);
+            if (reponse==a*b){
+                printf("bravo\n");
+            }
+            else {
+                printf("c'est faux, la reponse est %d\n",a*b);
+            }
+            cpt=cpt+1;//étape11
+        }//étape 9
+        
+        if (choix==2){
+            srand (time(NULL));
+            int a=rand()%101;
+            int b=rand()%101;
+            
+            int reponse;
+            if (a<b){
+                int c;
+                c=b;
+                b=a;
+                a=c;
+            }
+            printf("combien font %d-%d ?\n",a,b);
+            printf("entrez le résultat\n");
+            scanf("%d",&reponse);
+            printf("vous avez entré %d\n",reponse);
+            if (reponse==a-b){
+                printf("bravo\n");
+            }
+            else {
+                printf("c'est faux, la reponse est %d\n",a-b);
+            }//étape10
+            
+            cpt=cpt+1; }//étape11
+            
+            if (choix==4){
+                int table;
+                printf("quelle table de multiplication voulez vous travailler ?\n");
+                scanf("%d",&table);
+                printf("table de %d\n\n",table);
+                for (int i=1;i<11;i++){
+                    int resultat =i*table;
+                    printf("%d*%d=%d\n",i,table,resultat);}//étape12
+                for (int j=1;j<11;j++){
+                    int rep;
+                    printf("combien font %d*%d=\n",j,table);
+                    scanf("%d",&rep);
+                    if (rep==j*table){
+                        printf("gagné\n");}
+                    else{
+                        printf("perdu\n");
+                    }
+                }
+            cpt=cpt+1;//étape11
+            }//étape13
+            }
+    printf("votre nombre de points est %d\n",cpt);
+   
+    printf("quel est votre nom ?");
+    scanf("%s",&nom);
+    //fgets(nom, sizeof(nom),stdin);
+    //nom[strcspn(nom,"\n")]='\0';
+  
+    enregistrement_score(nom,cpt);
+    return 0;
+}

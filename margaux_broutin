@@ -67,6 +67,7 @@ int main()
       printf("|3 : Multiplication             |\n");
       printf("|4 : Tables de multiplication   |\n");
       printf("|5 : Divisions                  |\n");
+      printf("|6 : Pair ou impair             |\n");//jeu imagination étape 19
       printf("|0 : Sortir du jeu              |\n");
       printf("+-------------------------------+\n");
       printf("Quel est votre choix ?"); // étape 1
@@ -91,6 +92,7 @@ int main()
           case 3 : printf("Multiplication\n"); break;
           case 4 : printf("Tables de multiplications\n"); break;
           case 5 : printf("Divisions\n"); break;
+          case 6 : printf("Pair ou imapair\n"); break;//jeu imagination étape 19
           case 0 : printf("Sortir du jeu\n"); break;
           default : printf("Erreur : le choix doit être compris entre 0 et 5\n");
           
@@ -142,8 +144,8 @@ int main()
               printf("c'est faux, la reponse est %d\n",a+b);
           }
           cpt=cpt+1;//étape11
-          enregistrement_score(nom,cpt);//étape 17
-        }//étape 4 qui n'est plus nécessaire à l'étape 17*/ }
+          enregistrement_score(nom,cpt);//étape 16
+        }//étape 4 qui n'est plus nécessaire à l'étape 17*/
         
         if (choix==0){
             printf("merci de votre visite !\n\n");
@@ -153,8 +155,36 @@ int main()
             srand (time(NULL));
             int a=rand()%11;
             int b=rand()%11;
+            int nb_coup=1;// à rajouter pour l'étape 17
+            int points=0;// à rajouter pour l'étape 17
             int reponse;
-            printf("combien font %d*%d ?\n",a,b);
+            
+            while (nb_coup<=3){
+            printf("essai %d combien font %d*%d ?\n",nb_coup,a,b);
+            scanf("%d",&reponse);
+            if(reponse==a*b){
+                if(nb_coup==1){
+                    points=10;}
+                else if (nb_coup==2){
+                    points=5;}
+                else if(nb_coup==3){
+                    points=1;}
+                printf("bravo, vous avez trouvé en %d essais, vous gagnez %d point(s)\n", nb_coup, points);
+                break;//permet de sortir du while sans aller jusqu'a 3
+            }
+            else{
+                printf("mauvaise réponse\n");
+                if(nb_coup<3){
+                    printf("essayez encore\n");}
+                }
+            nb_coup=nb_coup+1;}
+          if(reponse!=a*b){
+            printf("c'est faux, la reponse est %d\n",a*b);
+          }
+          cpt=cpt+points;  //ajout des points obtenus au score total
+          enregistrement_score(nom, cpt);
+        }
+            /*printf("combien font %d*%d ?\n",a,b);
             printf("entrez le résultat\n");
             scanf("%d",&reponse);
             printf("vous avez entré %d\n",reponse);
@@ -165,13 +195,15 @@ int main()
                 printf("c'est faux, la reponse est %d\n",a*b);
             }
             cpt=cpt+1;//étape11
-            enregistrement_score(nom,cpt);//étape 17
-        }//étape 9
+            enregistrement_score(nom,cpt);//étape 16
+        }//étape 9 qui n'est plus nécessaire à l'étape 17*/
         
         if (choix==2){
             srand (time(NULL));
             int a=rand()%101;
             int b=rand()%101;
+            int nb_coup=1;// à rajouter pour l'étape 17
+            int points=0;// à rajouter pour l'étape 17
             
             int reponse;
             if (a<b){
@@ -180,6 +212,33 @@ int main()
                 b=a;
                 a=c;
             }
+            
+            while (nb_coup<=3){
+            printf("essai %d combien font %d-%d ?\n",nb_coup,a,b);
+            scanf("%d",&reponse);
+            if(reponse==a-b){
+                if(nb_coup==1){
+                    points=10;}
+                else if (nb_coup==2){
+                    points=5;}
+                else if(nb_coup==3){
+                    points=1;}
+                printf("bravo, vous avez trouvé en %d essais, vous gagnez %d point(s)\n", nb_coup, points);
+                break;//permet de sortir du while sans aller jusqu'a 3
+            }
+            else{
+                printf("mauvaise réponse\n");
+                if(nb_coup<3){
+                    printf("essayez encore\n");}
+                }
+            nb_coup=nb_coup+1;}
+          if(reponse!=a-b){
+            printf("c'est faux, la reponse est %d\n",a-b);
+          }
+          cpt=cpt+points;  //ajout des points obtenus au score total
+          enregistrement_score(nom, cpt);
+        }
+            /* étape 10 inutile pour létape 17
             printf("combien font %d-%d ?\n",a,b);
             printf("entrez le résultat\n");
             scanf("%d",&reponse);
@@ -192,34 +251,113 @@ int main()
             }//étape10
             
             cpt=cpt+1;//étape11
-            enregistrement_score(nom,cpt);}//étape 17
+            enregistrement_score(nom,cpt);}//étape 16
+            */
             
-            if (choix==4){
-                int table;
-                printf("quelle table de multiplication voulez vous travailler ?\n");
-                scanf("%d",&table);
-                printf("table de %d\n\n",table);
-                for (int i=1;i<11;i++){
-                    int resultat =i*table;
-                    printf("%d*%d=%d\n",i,table,resultat);}//étape12
-                for (int j=1;j<11;j++){
-                    int rep;
-                    printf("combien font %d*%d=\n",j,table);
+        if (choix==4){
+            int table;
+            printf("quelle table de multiplication voulez vous travailler ?\n");
+            scanf("%d",&table);
+            printf("table de %d\n\n",table);
+            for (int i=1;i<11;i++){
+                int resultat =i*table;
+                printf("%d*%d=%d\n",i,table,resultat);}//étape12
+            for (int j=1;j<11;j++){
+                int rep;
+                int nb_coup=1;// à rajouter pour l'étape 17
+                int points=0;// à rajouter pour l'étape 17
+                
+                while (nb_coup<=3){
+                    printf("essai %d : %d*%d =\n",nb_coup,j,table);
                     scanf("%d",&rep);
-                    if (rep==j*table){
-                        printf("gagné\n");}
-                    else{
-                        printf("perdu\n");
+                    if(rep==j*table){
+                        if(nb_coup==1){
+                            points=10;}
+                        else if (nb_coup==2){
+                            points=5;}
+                        else if(nb_coup==3){
+                            points=1;}
+                        printf("bravo, vous avez trouvé en %d essais, vous gagnez %d point(s)\n", nb_coup, points);
+                        break;//permet de sortir du while sans aller jusqu'a 3
+                    }else{
+                        printf("mauvaise réponse\n");
+                        if(nb_coup<3){
+                            printf("essayez encore\n");}
                     }
+                nb_coup=nb_coup+1;}
+            if(rep!=j*table){
+                printf("c'est faux, la reponse est %d\n",j*table);
+            }
+          cpt=cpt+points;  //ajout des points obtenus au score total
+          enregistrement_score(nom, cpt);}//étape 17
+
+            /* étape 11 inutile pour l'étape 17
+            printf("combien font %d*%d=\n",j,table);
+            scanf("%d",&rep);
+            if (rep==j*table){
+                printf("gagné\n");}
+            else{
+                printf("perdu\n");
+            }
+        }
+        cpt=cpt+1;//étape11
+        enregistrement_score(nom,cpt);//étape 16
+        }
+  }//étape13*/
+        }
+        if (choix==5){
+            srand(time(NULL));
+            int a=rand() % 101+1; // évite 0 pour le diviseur
+            int b=rand() % 10+1;  // diviseur entre 1 et 10
+            int nb_coup=1;
+            int points=0;
+            int reponse;
+            
+            while (nb_coup <= 3){
+                printf("essai %d combien font %d/%d ?(attention c'est une division entière)\n",nb_coup,a,b);
+                scanf("%d", &reponse);
+                if (reponse==a/b){
+                    if (nb_coup==1){
+                        points=10;} 
+                    else if (nb_coup==2){
+                        points=5;}
+                    else if (nb_coup==3){
+                        points=1;}
+            printf("bravo, vous avez trouvé en %d essais, vous gagnez %d point(s)\n",nb_coup,points);
+            break;
+                }else{
+                    printf("mauvaise réponse\n");
+                    if (nb_coup<3){
+                        printf("essayez encore\n");}
                 }
-            cpt=cpt+1;//étape11
-            enregistrement_score(nom,cpt);//étape 17
-            }//étape13
+            nb_coup=nb_coup+1;}
+        if (reponse!= a/b){
+            printf("c'est faux, la bonne réponse est %d\n",a/b);
+        }
+        cpt=cpt+ points;
+        enregistrement_score(nom, cpt);}//étape 18
+        
+        if (choix==6){
+            int nombre;
+            char reponse;
+            int points=0;
+            srand(time(NULL)); // pour avoir un nouveau nombre aléatoire à chaque fois
+            for (int i=0; i<5; i++){
+                nombre = rand() % 100+1;
+                printf("le nombre est : %d\n", nombre);
+                printf("est-il pair ou impair ? (p/i) :\n");
+                scanf(" %c", &reponse);
+                if ((nombre %2==0 && reponse=='p')||(nombre %2!=0 && reponse =='i')){
+                    printf("bravo !\n");
+                    cpt=cpt+5;
+                }else{
+                    printf("dommage, c'est faux\n");
+                }
+            enregistrement_score(nom, cpt);}
+        }//jeu imagination étape 19
     printf("votre nombre de points est %d\n\n",cpt);
    
     /*printf("quel est votre nom ?");
     scanf("%s",&nom);*/// utile à l'étape14 mais plus nécessaire à la 15
-    enregistrement_score(nom,cpt);//lancement de la fonction pour remplir le fichier pour étape 14
-    return 0;
-    } 
-
+    enregistrement_score(nom,cpt);}//lancement de la fonction pour remplir le fichier pour étape 14
+  return 0;}

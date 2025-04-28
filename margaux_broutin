@@ -101,8 +101,8 @@ int main()
       {
           int nb_coup=1;// à rajouter pour l'étape 17
           int points=0;// à rajouter pour l'étape 17
-          srand (time(NULL));
-          int a=rand()%101;
+          srand (time(NULL));//initialise le générateur de nb aléatoires
+          int a=rand()%101;//nb aléatoire entre 0 et 100
           int b=rand()%101;
           
           int reponse;
@@ -130,7 +130,7 @@ int main()
             printf("c'est faux, la reponse est %d\n",a+b);
           }//nouveau calcul de points, étape 17
           cpt=cpt+points;  //ajout des points obtenus au score total
-          enregistrement_score(nom, cpt);
+          enregistrement_score(nom, cpt);//étape 16
         }
           
           /*printf("combien font %d+%d ?\n",a,b);
@@ -153,7 +153,7 @@ int main()
         
         if (choix==3){
             srand (time(NULL));
-            int a=rand()%11;
+            int a=rand()%11;//nb aléatoire entre 0 et 10
             int b=rand()%11;
             int nb_coup=1;// à rajouter pour l'étape 17
             int points=0;// à rajouter pour l'étape 17
@@ -170,7 +170,7 @@ int main()
                 else if(nb_coup==3){
                     points=1;}
                 printf("bravo, vous avez trouvé en %d essais, vous gagnez %d point(s)\n", nb_coup, points);
-                break;//permet de sortir du while sans aller jusqu'a 3
+                break;//permet de sortir du while sans aller jusqu'à 3
             }
             else{
                 printf("mauvaise réponse\n");
@@ -182,7 +182,7 @@ int main()
             printf("c'est faux, la reponse est %d\n",a*b);
           }
           cpt=cpt+points;  //ajout des points obtenus au score total
-          enregistrement_score(nom, cpt);
+          enregistrement_score(nom, cpt);//étape 16
         }
             /*printf("combien font %d*%d ?\n",a,b);
             printf("entrez le résultat\n");
@@ -236,7 +236,7 @@ int main()
             printf("c'est faux, la reponse est %d\n",a-b);
           }
           cpt=cpt+points;  //ajout des points obtenus au score total
-          enregistrement_score(nom, cpt);
+          enregistrement_score(nom, cpt);//étape 16
         }
             /* étape 10 inutile pour létape 17
             printf("combien font %d-%d ?\n",a,b);
@@ -262,7 +262,7 @@ int main()
             for (int i=1;i<11;i++){
                 int resultat =i*table;
                 printf("%d*%d=%d\n",i,table,resultat);}//étape12
-            for (int j=1;j<11;j++){
+            for (int j=1;j<11;j++){//boucle utilisée pou attribuer des points à chaque multiplication posée
                 int rep;
                 int nb_coup=1;// à rajouter pour l'étape 17
                 int points=0;// à rajouter pour l'étape 17
@@ -289,7 +289,7 @@ int main()
                 printf("c'est faux, la reponse est %d\n",j*table);
             }
           cpt=cpt+points;  //ajout des points obtenus au score total
-          enregistrement_score(nom, cpt);}//étape 17
+          enregistrement_score(nom, cpt);}//étape 16
 
             /* étape 11 inutile pour l'étape 17
             printf("combien font %d*%d=\n",j,table);

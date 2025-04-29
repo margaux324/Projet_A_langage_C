@@ -6,15 +6,15 @@
 #define FILE_NAME "scores.txt"// à rajouter pour l'étape 14, fichier pour sauvegarde des scores
 
 void enregistrement_score(const char* nom, int cpt){
-    FILE*fichier=fopen("scores.txt","a");
+    FILE*fichier=fopen("scores.txt","a");//ouverture du fichier en mode "ajout"
     if (fichier==NULL){
         printf("le fichier ne s'est pas ouvert\n");
         return;
     }
     time_t temps = time(NULL);//donne le temps actuel
-    struct tm *tm_info=localtime(&temps);//converti le temps en structure tm
+    struct tm *tm_info=localtime(&temps);//converti le temps en structure tm = temps et heure locale
     char date_heure[30];//tableau qui stocke la date et l'heure
-    strftime((date_heure), sizeof(date_heure),"%d/%m/%Y %H:%M:%S", tm_info);
+    strftime((date_heure), sizeof(date_heure),"%d/%m/%Y %H:%M:%S", tm_info);//met le jour et l'heure au bon format
         
     //remplir le fichier avec les infos
     fprintf(fichier, "nom :%s\n",nom);
@@ -26,7 +26,7 @@ void enregistrement_score(const char* nom, int cpt){
 
 
 void retrouver_scores(const char* nom) {
-    FILE* fichier = fopen(FILE_NAME, "r");
+    FILE* fichier = fopen(FILE_NAME, "r");//ouvre le fichier en mode lecture
     if (fichier == NULL) {
         printf("vous n'avez pas d'ancien score\n");
         return;
@@ -39,7 +39,7 @@ void retrouver_scores(const char* nom) {
         if (strstr(données, nom) != NULL) {
             ancien_score = 1;
             printf("\nAncien score trouvé pour %s :\n", nom);
-            printf("%s", données); // nom
+            printf("%s", données); // aafiche le ligne du nom
             if (fgets(données, sizeof(données), fichier)) printf("%s", données); // lit et affiche les données de date et heure
             if (fgets(données, sizeof(données), fichier)) printf("%s\n", données); // lit et affiche les données du score
         }
@@ -58,7 +58,7 @@ int main()
   char nom[20];// à rajouter pour l'étape 14
   printf("entrez votre nom : ");
   scanf("%s", nom);
-  retrouver_scores(nom);
+  retrouver_scores(nom);//fait appel à la fonction pour retrouver les scores
   
   while (choix!=0){// à rajouter pour l'étape 5
       printf("+-------------------------------+\n");
@@ -211,7 +211,7 @@ int main()
                 c=b;
                 b=a;
                 a=c;
-            }
+            }//changement de variable si le premier nombre est plus petit pour ne pas avoir de résultat négatif
             
             while (nb_coup<=3){
             printf("essai %d combien font %d-%d ?\n",nb_coup,a,b);
@@ -262,10 +262,13 @@ int main()
             for (int i=1;i<11;i++){
                 int resultat =i*table;
                 printf("%d*%d=%d\n",i,table,resultat);}//étape12
-            for (int j=1;j<11;j++){//boucle utilisée pou attribuer des points à chaque multiplication posée
+                //boucle utilisée pour afficher les tables
+                
+            for (int j=1;j<11;j++){
                 int rep;
                 int nb_coup=1;// à rajouter pour l'étape 17
                 int points=0;// à rajouter pour l'étape 17
+                //boucle utilisée pou attribuer des points à chaque multiplication posée
                 
                 while (nb_coup<=3){
                     printf("essai %d : %d*%d =\n",nb_coup,j,table);
@@ -307,8 +310,8 @@ int main()
         }
         if (choix==5){
             srand(time(NULL));
-            int a=rand() % 101+1; // évite 0 pour le diviseur
-            int b=rand() % 10+1;  // diviseur entre 1 et 10
+            int a=rand() % 101+1; // évite le 0 dans la division
+            int b=rand() % 10+1;  
             int nb_coup=1;
             int points=0;
             int reponse;

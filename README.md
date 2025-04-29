@@ -14,7 +14,11 @@ J'utilise aussi le fichier texte "scores.txt" pour stocker les différents score
 
 Pour les outils et commandes utilisés, j'ai fait appe; à différents bibliotheques :
 
+
 stdio.h, pour les entrées/sorties standard comme printf ou scanf par exemple
+
 stdlib.h : pour rand() et srand() (ce qui concerne la génération de nombres aléatoires)
+
 time.h : pour time() et strftime() (ce qui concerne la gestion de la date et de l’heure)
+
 string.h : pour la gestion de chaînes de caractères (strstr() qui permet de retrouver un nom dans le fichier)

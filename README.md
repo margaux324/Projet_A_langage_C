@@ -1,18 +1,18 @@
-Ce projet est un jeu éducatif en langage C qui propose différents types d’exercices de mathématiques, niveau CM1.
-En effet, on y retrouve l'addition, la soustraction, les mutiplications et les tables, les divisons et la parité d'un nombre.
+Ce projet est un jeu éducatif en langage C qui propose différents types d’exercices de mathématiques, de niveau CM1.
+En effet, on y retrouve l'addition, la soustraction, les mutiplications et les tables, les divisons ainsi que la parité d'un nombre.
 
-Le joueur arrive sur l'interface du jeu etdoit entrer son nom.
-Puis le menu d'affichage apparait, avec les différents jeux proposés et le joueur est invité à sasir un nombre pour choisir son jeu.
+Le joueur arrive sur l'interface du jeu et doit entrer son nom.
+Puis le menu d'affichage apparaît, avec les différents jeux proposés et le joueur est invité à saisir un nombre pour choisir son jeu.
 Le jeu choisi est alors lancé et le joueur doit résoudre des calculs générés aléatoirement. 
 Un système de points est attribué selon le nombre d'essais (maximum 3 essais et entre 0 et 10 points attribués par question).
 Les scores sont enregistrés avec le nom de joueur, la date et l'heure dans un fichier texte (scores.txt). 
-Lorsque les joueurs saisissent leurs noms au debut, les anciens scores sont automatiquement affichés (s’ils existent).
+Lorsque les joueurs saisissent leurs noms au début, les anciens scores sont automatiquement affichés (s’ils existent).
 
 Pour la compilation et l'éxécution, j'ai utilisé le compilateur en ligne : ONLINE C COMPILER.
 Ce qui a évité les problémes de compatibilités de certaines applications, sur les différents ordinateurs avec lesquels j'ai travaillé.
 J'utilise aussi le fichier texte "scores.txt" pour stocker les différents scores au cours du jeu.
 
-Pour les outils et commandes utilisés, j'ai fait appe; à différents bibliotheques :
+Pour les outils et commandes utilisés, j'ai fait appel à différentes bibliothèques :
 
 
 stdio.h, pour les entrées/sorties standard comme printf ou scanf par exemple
